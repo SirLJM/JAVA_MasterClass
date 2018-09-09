@@ -17,8 +17,15 @@ public class Main {
             return -1;
         }
 
-        while (number / 10 != 0) {
+        int firstDigit = 0;
+        int lastDigit = number % 10;
 
+        while (number > 0) {
+            firstDigit = number % 10;
+            number /= 10;
         }
+
+        return firstDigit + lastDigit;
     }
+
 }
