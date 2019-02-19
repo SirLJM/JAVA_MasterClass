@@ -20,6 +20,6 @@ public class Main {
 
         VipCustomer vipCustomer1 = new VipCustomer("Mark J", 200.00);
         System.out.println(vipCustomer1.getName() + vipCustomer1.getEmail());
-        
+
     }
 }
