@@ -12,47 +12,39 @@ public class Burger {
     private Addition addition4;
     private double basePrice;
 
-    public Burger(String name, String breadRollType, String meat, int numberOfAdditions, Addition addition1, Addition addition2, Addition addition3, Addition addition4, double basePrice) {
+
+    public Burger(String name, String breadRollType, String meat, double basePrice) {
+        this(name, breadRollType, meat, null, null, null, null, basePrice);
+        this.numberOfAdditions = 0;
+    }
+
+    public Burger(String name, String breadRollType, String meat, Addition addition1, double basePrice) {
+        this(name, breadRollType, meat, addition1, null, null, null, basePrice);
+        this.numberOfAdditions = 1;
+    }
+
+    public Burger(String name, String breadRollType, String meat, Addition addition1,
+                  Addition addition2, double basePrice) {
+        this(name, breadRollType, meat, addition1, addition2, null, null, basePrice);
+        this.numberOfAdditions = 2;
+    }
+
+    public Burger(String name, String breadRollType, String meat, Addition addition1,
+                  Addition addition2, Addition addition3, double basePrice) {
+        this(name, breadRollType, meat, addition1, addition2, addition3, null, basePrice);
+        this.numberOfAdditions = 3;
+    }
+
+    public Burger(String name, String breadRollType, String meat, Addition addition1,
+                  Addition addition2, Addition addition3, Addition addition4, double basePrice) {
         this.name = name;
         this.breadRollType = breadRollType;
         this.meat = meat;
-        if (numberOfAdditions >= 5 || numberOfAdditions < 0) {
-            System.out.println("Additions only between 0 and 4");
-        } else {
-            switch (numberOfAdditions) {
-                case 0:
-                    this.addition1 = null;
-                    this.addition2 = null;
-                    this.addition3 = null;
-                    this.addition4 = null;
-                    break;
-                case 1:
-                    this.addition1 = addition1;
-                    this.addition2 = null;
-                    this.addition3 = null;
-                    this.addition4 = null;
-                    break;
-                case 2:
-                    this.addition1 = addition1;
-                    this.addition2 = addition2;
-                    this.addition3 = null;
-                    this.addition4 = null;
-                    break;
-                case 3:
-                    this.addition1 = addition1;
-                    this.addition2 = addition2;
-                    this.addition3 = addition3;
-                    this.addition4 = null;
-                    break;
-                case 4:
-                    this.addition1 = addition1;
-                    this.addition2 = addition2;
-                    this.addition3 = addition3;
-                    this.addition4 = addition4;
-                    break;
-            }
-        }
-        this.numberOfAdditions = numberOfAdditions;
+        this.addition1 = addition1;
+        this.addition2 = addition2;
+        this.addition3 = addition3;
+        this.addition4 = addition4;
+        this.numberOfAdditions = 4;
         this.basePrice = basePrice;
     }
 
@@ -78,10 +70,6 @@ public class Burger {
     }
 
     public void showOrder() {
-        System.out.println("|" + getName() + "|" + "\n"
-        + "Bread roll type: " + getBreadRollType() + "\n"
-        + "Meat: " + getMeat() + "\n"
-        + "Base price: " + getBasePrice());
         switch (this.numberOfAdditions) {
             case 1:
                 System.out.println(addition1.getClass().getSimpleName() + " : " + addition1.getPrice());
@@ -102,7 +90,15 @@ public class Burger {
                 System.out.println(addition4.getClass().getSimpleName() + " : " + addition4.getPrice());
                 break;
         }
-        System.out.println("Total price: " + calculatePrice());
+    }
+
+    public void showOrderAndPrice() {
+        System.out.println("|" + getName() + "|" + "\n"
+                + "Bread roll type: " + getBreadRollType() + "\n"
+                + "Meat: " + getMeat() + "\n"
+                + "Base price: " + getBasePrice());
+        this.showOrder();
+        System.out.println("Full price: " + this.calculatePrice());
     }
 
     public String getName() {
@@ -139,5 +135,9 @@ public class Burger {
 
     public double getBasePrice() {
         return basePrice;
+    }
+
+    public void setNumberOfAdditions(int numberOfAdditions) {
+        this.numberOfAdditions = numberOfAdditions;
     }
 }
